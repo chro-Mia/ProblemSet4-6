@@ -50,7 +50,11 @@ public class Player
      */
     private int randomPlay(Board b)
     {
-        return -1;
+        int col = (int)(Math.random() * b.getNumCols() + 1);
+        while(!b.getMark(b.getNumRows() - 1, col - 1).equals(" ")){
+            col = (int)(Math.random() * b.getNumCols() + 1);
+        }
+        return col;
     }
 
     // If you are implementing better AI, this is where it should go. To test this you will need to

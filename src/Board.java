@@ -51,6 +51,10 @@ public class Board{
 
     public boolean play(int col, String mark){
         for(int c = 0; c < boardArray.length; c++){
+            if(col > boardArray[0].length){
+                break;
+            }
+
             if(boardArray[c][col - 1].equals(" ")){
                 boardArray[c][col - 1] = mark;
                 emptySquares--;
