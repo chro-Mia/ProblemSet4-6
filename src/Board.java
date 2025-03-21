@@ -72,32 +72,32 @@ public class Board{
 
         // n|s check
         for (int r = indexlastPlayedRow - (numToWin - 1); r < indexlastPlayedRow + (numToWin - 1); r++) {
-            try {
-                if (boardArray[r][indexlastPlayedCol].equals(lastMark)) {
+            if(r > -1 && r < boardArray.length)
+            {
+                if (boardArray[r][indexlastPlayedCol].equals(lastMark))
+                {
                     consecutiveMarks++;
-                } else {
+                } else
+                {
                     consecutiveMarks = 0;
                 }
-            }
-            //ignore index out of bounds because im not clamping indexes
-            catch (ArrayIndexOutOfBoundsException _) {
-            }
 
-            if (consecutiveMarks == numToWin) {
-                return lastMark;
+                if (consecutiveMarks == numToWin) {
+                    return lastMark;
+                }
             }
         }
         consecutiveMarks = 0;
 
         // e|w check
         for (int c = indexlastPlayedCol - (numToWin - 1); c < indexlastPlayedCol + (numToWin - 1); c++) {
-            try {
+            if(c > -1 && c < boardArray[0].length){
                 if (boardArray[indexlastPlayedRow][c].equals(lastMark)) {
                     consecutiveMarks++;
-                } else {
+                } else
+                {
                     consecutiveMarks = 0;
                 }
-            } catch (ArrayIndexOutOfBoundsException _) {
             }
 
             if (consecutiveMarks == numToWin) {
@@ -109,15 +109,16 @@ public class Board{
         // l|r diagonal check
         int i = 0;
         for(int r = indexlastPlayedRow - (numToWin - 1); r < indexlastPlayedRow + (numToWin - 1); r++){
-            try{
-                if(boardArray[r][indexlastPlayedCol - (numToWin - 1) + i].equals(lastMark)){
+            if(r > -1 &&
+                    r < boardArray.length &&
+                    indexlastPlayedCol - (numToWin - 1) + i > -1 &&
+                    indexlastPlayedCol - (numToWin - 1) + i < boardArray[0].length) {
+                if (boardArray[r][indexlastPlayedCol - (numToWin - 1) + i].equals(lastMark)) {
                     consecutiveMarks++;
-                }
-                else{
+                } else {
                     consecutiveMarks = 0;
                 }
             }
-            catch(ArrayIndexOutOfBoundsException _){}
 
             if(consecutiveMarks == numToWin){
                 return lastMark;
@@ -129,7 +130,10 @@ public class Board{
         i = 0;
         // r|l diagonal check
         for(int r = indexlastPlayedRow - (numToWin - 1); r < indexlastPlayedRow + (numToWin - 1); r++){
-            try{
+            if(r > -1 &&
+                    r < boardArray.length &&
+                    indexlastPlayedCol - (numToWin - 1) + i > -1 &&
+                    indexlastPlayedCol - (numToWin - 1) + i < boardArray[0].length){
                 if(boardArray[r][indexlastPlayedCol + (numToWin - 1) - i].equals(lastMark)){
                     consecutiveMarks++;
                 }
@@ -137,7 +141,6 @@ public class Board{
                     consecutiveMarks = 0;
                 }
             }
-            catch(ArrayIndexOutOfBoundsException _){}
 
             if(consecutiveMarks == numToWin){
                 return lastMark;
